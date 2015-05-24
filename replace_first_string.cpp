@@ -25,10 +25,9 @@ string replace_first_string(const string &str,
         return str;
     }
 
-    string new_str;
 
     int end_index = str_size - pat_size;
-    for (int i = 0; i< end_index; i++) {
+    for (int i = 0; i <= end_index; i++) {
         int k = i;
         // compare with every char in pattern
         bool found = true;
@@ -41,40 +40,52 @@ string replace_first_string(const string &str,
 
         // Found the pattern in string
         if (found) {
-            new_str = str.substr(0, i) + replace_str + str.substr(i + pat_size);
+            cout << "found\n";
+            string new_str = str.substr(0, i) + replace_str + str.substr(i + pat_size);
             return new_str;
 
         }
     }
 
     // Not found, return original string
+    cout << "not found\n";
     return str;
 }
 
+void test(const string &str, const string &pat, 
+          const string &rep, const string &output)
+{
+    cout << "testing str=" << str << " pat=" << pat << " "
+         << "rep=" << rep << " out=" << output << "\n";
+    string new_str = replace_first_string(str, pat, rep);
+    bool ok = (new_str == output);
+    if (!ok) {
+        cout << "new_str=" << new_str << "\n";
+    }
+    assert(ok);
+}
 
 int main()
 {
     string str="abcdef";
     string pattern = "cd";
     string replace_str = "XY";
-    
+    string output = "abXYef";
+
     // test case 1
-    string new_str = replace_first_string(str, pattern, replace_str);
-    bool ok = (new_str == "abXYef");
-    assert(ok);
+    test(str, pattern, replace_str, output);
     
     // str is empty
     str = "";
-    new_str = replace_first_string(str, pattern, replace_str);
-    ok = (new_str == "");
-    assert(ok);
+    test(str, pattern, replace_str, str);
     
-    // str = "a";
     str = "a";
-    new_str = replace_first_string(str, pattern, replace_str);
-    ok = (str == "a");
-    assert(ok);
+    test(str, pattern, replace_str, str);
 
+    str = "abcd";
+    pattern = "bcd";
+    replace_str = "XYZ";
+    test(str, pattern, replace_str, "aXYZ");
 
     cout << "ok\n";
     return 0;
