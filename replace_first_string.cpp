@@ -86,7 +86,12 @@ int main()
     pattern = "bcd";
     replace_str = "XYZ";
     test(str, pattern, replace_str, "aXYZ");
-
-    cout << "ok\n";
+    
+    str = "ab";
+    pattern = "a";
+    replace_str = "X";
+    test(str, pattern, replace_str, "Xb");
+    
+    test("ab", "b", "X", "aX");
     return 0;
 }
