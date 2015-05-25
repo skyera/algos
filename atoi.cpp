@@ -36,7 +36,7 @@ int myatoi(const string &str)
 
     if (i == size) return 0;
     
-    long long num = 0;
+    double num = 0;
     while (i < size && isdigit(str[i])) {
         ch = str[i];
         num = num * 10 + (ch - '0');
@@ -73,4 +73,5 @@ int main()
     test("-", 0);
     test("-2", -2);
     test("923372036854775809", 2147483647);
+    test("11111111111111923372036854775809", 2147483647);
 }
