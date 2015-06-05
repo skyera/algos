@@ -18,21 +18,31 @@ using namespace std;
 
 int compare_version(const string &a, const string &b)
 {
+    // string a
+    string a_major;
+    string a_minor;
+
     size_t a_dot_pos = a.find('.');
     if (a_dot_pos == string::npos) {
-        return -2;
+        a_major = a;
+        a_minor = '0';
+    } else {
+        a_major = a.substr(0, a_dot_pos);
+        a_minor = a.substr(a_dot_pos + 1);
     }
     
+    // string b
+    string b_major;
+    string b_minor;
     size_t b_dot_pos = b.find('.');
     if (b_dot_pos == string::npos) {
-        return -2;
+        b_major = b;
+        b_minor = '0';
+    } else {
+        b_major = b.substr(0, b_dot_pos);
+        b_minor = b.substr(b_dot_pos + 1);
     }
 
-    string a_major = a.substr(0, a_dot_pos);
-    string a_minor = a.substr(a_dot_pos + 1);
-    string b_major = b.substr(0, b_dot_pos);
-    string b_minor = b.substr(b_dot_pos + 1);
-    
     int a_major_num = atoi(a_major.c_str());
     int a_minor_num = atoi(a_minor.c_str());
     int b_major_num = atoi(b_major.c_str());
@@ -73,7 +83,7 @@ int main()
     test("1.2", "1.1", 1);
     test("13.37", "2.1", 1);
     test("1.21", "1.21", 0);
-    test("12", "21", -2);
+    test("1", "0", 1);
 
     return 0;
 }
