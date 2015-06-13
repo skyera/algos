@@ -8,30 +8,17 @@ using namespace std;
 
 void insertion_sort(int a[], int n)
 {
-    for (int i = 0; i < n; i++) {
-        cout << a[i] << ",";    
-    }
-
-    cout << endl;
     for (int i = 1; i < n; i++) {
         int key = a[i];
 
         // compare key with every item in sorted sequence
-        int j;
-        for (j = i - 1; j >= 0; j--) {
-            if (a[j] > key) {
-                a[j + 1] = a[j]; 
-            } else {
-                break;
-            }
+        int j = i - 1;
+        while (j >= 0 && a[j] > key) {
+            a[j + 1] = a[j]; 
+            j--;
         }
         a[j + 1] = key;
     }
-
-    for (int i = 0; i < n; i++) {
-        cout << a[i] << ",";    
-    }
-    cout << endl;
 }
 
 void test(int A[], int n, int B[])
