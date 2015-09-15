@@ -39,11 +39,36 @@ public class UniqueChar
         return true;
     }
 
-    public static void test(String str, boolean flag)
+    boolean hasUniqueChar3(String str)
+    {
+        boolean flags[] = new boolean[256];
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (!flags[ch]) {
+                flags[ch] = true;
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static void test(String str, boolean flag, int which)
     {
         UniqueChar unique = new UniqueChar();
 
-        boolean is_unique = unique.hasUniqueChars(str);
+        boolean is_unique = false;
+        
+        if (which == 1) {
+            is_unique = unique.hasUniqueChars(str);
+        } else if (which == 2) {
+            is_unique = unique.hasUniqueChars2(str);
+        } else if (which == 3) {
+            is_unique = unique.hasUniqueChar3(str);
+        }
+
         boolean ok = (is_unique == flag);
 
         if (!ok) {
@@ -53,30 +78,21 @@ public class UniqueChar
         }
     }
     
-    public static void test2(String str, boolean flag)
-    {
-        UniqueChar unique = new UniqueChar();
-
-        boolean is_unique = unique.hasUniqueChars2(str);
-        boolean ok = (is_unique == flag);
-
-        if (!ok) {
-            System.out.println("Failed for " + str);
-        } else {
-            System.out.println("pass");
-        }
-    }
-
     public static void main(String[] args)
     {
-        test("abc", true);
-        test("aba", false);
-        test("", true);
-        test("a", true);
+        test("abc", true, 1);
+        test("aba", false, 1);
+        test("", true, 1);
+        test("a", true, 1);
         
-        test2("abc", true);
-        test2("aba", false);
-        test2("", true);
-        test2("a", true);
+        test("abc", true, 2);
+        test("aba", false, 2);
+        test("", true, 2);
+        test("a", true, 2);
+        
+        test("abc", true, 3);
+        test("aba", false, 3);
+        test("", true, 3);
+        test("a", true, 3);
     }
 }
