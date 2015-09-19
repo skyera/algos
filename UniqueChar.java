@@ -67,6 +67,8 @@ public class UniqueChar
             is_unique = unique.hasUniqueChars2(str);
         } else if (which == 3) {
             is_unique = unique.hasUniqueChar3(str);
+        } else if(which == 4) {
+            is_unique = isUniqueChars(str);
         }
 
         boolean ok = (is_unique == flag);
@@ -76,6 +78,20 @@ public class UniqueChar
         } else {
             System.out.println("pass");
         }
+    }
+
+    public static boolean isUniqueChars(String str)
+    {
+        int checker = 0;
+        for (int i = 0; i < str.length(); i++) {
+            int val = str.charAt(i) - 'a';
+            if ((checker & (1 << val)) > 0) {
+                return false;
+            }
+            checker |= (1 << val);
+        }
+
+        return true;
     }
     
     public static void main(String[] args)
@@ -94,5 +110,11 @@ public class UniqueChar
         test("aba", false, 3);
         test("", true, 3);
         test("a", true, 3);
+        
+        System.out.println("test isUniqueChars");
+        test("abc", true, 4);
+        test("aba", false, 4);
+        test("", true, 4);
+        test("a", true, 4);
     }
 }
