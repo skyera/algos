@@ -64,5 +64,7 @@ int main()
     test("abcd", "bc", 1);
     test("abc", "", -1);
     test("a", "xxx", -1);
+    test("", "ab", -1);
+    test("", "", -1);
     return 0;
 }
